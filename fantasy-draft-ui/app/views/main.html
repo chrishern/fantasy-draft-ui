@@ -65,17 +65,22 @@
 
 
 <div ng-controller="FplSortableCtrl" class="container">
-	<h2>ui.sortable complex cancel</h2>
-	<h3>List #2 can't have more than 10 elements</h3>
+	<h2>Search for player: </h2>
 
 	<div class="floatleft">
 		<div ui-sortable="sortablePoolGoalkeepers" id="poolGoalkeepers" class="apps-container screen" 
 		ng-model="screen" ng-repeat="screen in poolGoalkeepers">
+			<input type="text" ng-model="selected" 
+			typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
+		
 			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
 		</div>
 		
 		<div ui-sortable="sortablePoolDefenders" id="poolDefenders" class="apps-container screen" 
 		ng-model="screen" ng-repeat="screen in poolDefenders">
+			<input type="text" ng-model="selected" 
+			typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
+		
 			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
 		</div>
 		
