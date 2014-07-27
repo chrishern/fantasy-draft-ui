@@ -27,17 +27,95 @@
 <div class="container">
 	<h2>My todos</h2>
   
-	<p class="form-group" ng-repeat="todo in todos">
-		<input type="text" ng-model="todo" class="form-control">
-	</p>
-  
-	<li ng-repeat="player in players">
+	<div ui-sortable ng-model="todos">
+		<p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
+			<input type="text" ng-model="todo" class="form-control">
+			<span class="input-group-btn">
+				<button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
+			</span>
+		</p>
+	</div>
+	
+	
+	<!--<li ng-repeat="player in players">
 		<span>{{player.forename}}</span>
 		<span>{{player.surname}}</span>
 	</li>
+	-->
+</div>
+
+
+
+
+<div ng-controller="SortableCtrl" class="container">
+	<h2>ui.sortable complex cancel</h2>
+	<h3>List #2 can't have more than 10 elements</h3>
+
+	<div class="floatleft">
+		<div ui-sortable="sortableOptions" id="screen-{{$index}}" class="apps-container screen floatleft" 
+		ng-model="screen" ng-repeat="screen in rawScreens">
+			<div class="app" ng-repeat="app in screen">{{$index}} {{app.title}}</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+  
+	<div class="clear"></div>
+  
+</div>
+
+
+<div ng-controller="FplSortableCtrl" class="container">
+	<h2>ui.sortable complex cancel</h2>
+	<h3>List #2 can't have more than 10 elements</h3>
+
+	<div class="floatleft">
+		<div ui-sortable="sortablePoolGoalkeepers" id="poolGoalkeepers" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in poolGoalkeepers">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div ui-sortable="sortablePoolDefenders" id="poolDefenders" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in poolDefenders">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div ui-sortable="sortablePoolMidfielders" id="poolMidfielders" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in poolMidfielders">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div ui-sortable="sortablePoolStrikers" id="poolStrikers" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in poolStrikers">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div style="clear: both;"></div>
+	</div>
 	
-	<li >
-		<span>hello</span>
-		<span>hello</span>
-	</li>
+	<div class="floatright">
+		<div ui-sortable="sortableSelectedGoalkeepers" id="selectedGoalkeepers" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in teamGoalkeepers">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div ui-sortable="sortableSelectedDefenders" id="selectedDefenders" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in teamDefenders">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div ui-sortable="sortableSelectedMidfielders" id="selectedMidfielders" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in teamMidfielders">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div ui-sortable="sortableSelectedStrikers" id="selectedStrikers" class="apps-container screen" 
+		ng-model="screen" ng-repeat="screen in teamStrikers">
+			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+		</div>
+		
+		<div style="clear: both;"></div>
+	</div>
+  
+	<div class="clear"></div>
+  
 </div>
