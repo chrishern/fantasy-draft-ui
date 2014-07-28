@@ -68,31 +68,43 @@
 	<h2>Search for player: </h2>
 
 	<div class="floatleft">
-		<div ui-sortable="sortablePoolGoalkeepers" id="poolGoalkeepers" class="apps-container screen" 
-		ng-model="screen" ng-repeat="screen in poolGoalkeepers">
-			<input type="text" ng-model="selected" 
-			typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
-		
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
-		</div>
-		
-		<div ui-sortable="sortablePoolDefenders" id="poolDefenders" class="apps-container screen" 
-		ng-model="screen" ng-repeat="screen in poolDefenders">
-			<input type="text" ng-model="selected" 
-			typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
-		
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
-		</div>
-		
-		<div ui-sortable="sortablePoolMidfielders" id="poolMidfielders" class="apps-container screen" 
-		ng-model="screen" ng-repeat="screen in poolMidfielders">
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
-		</div>
-		
-		<div ui-sortable="sortablePoolStrikers" id="poolStrikers" class="apps-container screen" 
-		ng-model="screen" ng-repeat="screen in poolStrikers">
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
-		</div>
+		<accordion >
+
+			<accordion-group heading="Goalkeepers">
+				<div ui-sortable="sortablePoolGoalkeepers" id="poolGoalkeepers" class="apps-container screen" 
+				ng-model="screen" ng-repeat="screen in poolGoalkeepers">
+					<input type="text" ng-model="selected" 
+					typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
+				
+					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+				</div>
+			</accordion-group>
+			
+			<accordion-group heading="Defenders">
+				<div ui-sortable="sortablePoolDefenders" id="poolDefenders" class="apps-container screen" 
+				ng-model="screen" ng-repeat="screen in poolDefenders">
+					<input type="text" ng-model="selected" 
+					typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
+				
+					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+				</div>
+			</accordion-group>
+			
+			<accordion-group heading="Midfielders">
+				<div ui-sortable="sortablePoolMidfielders" id="poolMidfielders" class="apps-container screen" 
+				ng-model="screen" ng-repeat="screen in poolMidfielders">
+					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+				</div>
+			</accordion-group>
+			
+			<accordion-group heading="Strikers">
+				<div ui-sortable="sortablePoolStrikers" id="poolStrikers" class="apps-container screen" 
+				ng-model="screen" ng-repeat="screen in poolStrikers">
+					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+				</div>
+			</accordion-group>
+
+		</accordion>
 		
 		<div style="clear: both;"></div>
 	</div>
