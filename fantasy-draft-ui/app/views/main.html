@@ -1,69 +1,3 @@
-<!--
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
--->
-
-<div class="container">
-	<h2>My todos</h2>
-  
-	<div ui-sortable ng-model="todos">
-		<p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
-			<input type="text" ng-model="todo" class="form-control">
-			<span class="input-group-btn">
-				<button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
-			</span>
-		</p>
-	</div>
-	
-	
-	<!--<li ng-repeat="player in players">
-		<span>{{player.forename}}</span>
-		<span>{{player.surname}}</span>
-	</li>
-	-->
-</div>
-
-
-
-
-<div ng-controller="SortableCtrl" class="container">
-	<h2>ui.sortable complex cancel</h2>
-	<h3>List #2 can't have more than 10 elements</h3>
-
-	<div class="floatleft">
-		<div ui-sortable="sortableOptions" id="screen-{{$index}}" class="apps-container screen floatleft" 
-		ng-model="screen" ng-repeat="screen in rawScreens">
-			<div class="app" ng-repeat="app in screen">{{$index}} {{app.title}}</div>
-		</div>
-		<div style="clear: both;"></div>
-	</div>
-  
-	<div class="clear"></div>
-  
-</div>
-
-
 <div ng-controller="FplSortableCtrl" class="container">
 	<h2>Search for player: </h2>
 
@@ -73,9 +7,6 @@
 			<accordion-group heading="Goalkeepers">
 				<div ui-sortable="sortablePoolGoalkeepers" id="poolGoalkeepers" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolGoalkeepers">
-					<input type="text" ng-model="selected" 
-					typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
-				
 					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
 				</div>
 			</accordion-group>
@@ -83,9 +14,6 @@
 			<accordion-group heading="Defenders">
 				<div ui-sortable="sortablePoolDefenders" id="poolDefenders" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolDefenders">
-					<input type="text" ng-model="selected" 
-					typeahead="player.title for player in screen | filter:$viewValue | limitTo:8" class="form-control" />
-				
 					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
 				</div>
 			</accordion-group>
@@ -100,7 +28,7 @@
 			<accordion-group heading="Strikers">
 				<div ui-sortable="sortablePoolStrikers" id="poolStrikers" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolStrikers">
-					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+					<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}} </div>
 				</div>
 			</accordion-group>
 
@@ -134,5 +62,8 @@
 	</div>
   
 	<div class="clear"></div>
-  
-</div>
+  	
+  	<div id="formSubmit" ng-controller="ServicesCtrl">
+  	  	<button class="btn btn-primary"  id="saveTeamButton" ng-click="postTeamSelection()">Save!</button>
+  	</div>
+</div>	

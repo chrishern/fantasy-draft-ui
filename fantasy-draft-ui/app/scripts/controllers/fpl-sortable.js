@@ -16,11 +16,17 @@ angular.module('fantasyDraftUiApp').controller('FplSortableCtrl',
 
 			for (var i = 1; i <= limit; i++){
 			  tmpList.push({
-				title: position + ' ' + i + ' to select ',
-				position: position,
-				pool: true,
-				value: i
-			  });
+				//title: position + ' ' + i + ' to select ',
+				//position: position,
+				//squad: false,
+				//value: i
+
+				id: i,
+				forename: position + ' ' + i,
+				surname: ' to select',
+				team: 'Team',
+				position: position
+ 			  });
 			}
 			return tmpList;
 		}
@@ -32,7 +38,7 @@ angular.module('fantasyDraftUiApp').controller('FplSortableCtrl',
 			  tmpList.push({
 				title: position + ' ' + i,
 				position: position,
-				pool: false,
+				squad: true,
 				value: i
 			  });
 			}
@@ -43,7 +49,7 @@ angular.module('fantasyDraftUiApp').controller('FplSortableCtrl',
 			var indexToRemove = -1; 
 					
 			for (var i = list.length - 1; i >= 0; i--) { 
-				if (!list[i].pool) {
+				if (list[i].squad) {
 					indexToRemove = i;
 					i = -1;
 				}
