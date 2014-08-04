@@ -15,7 +15,7 @@ angular.module('fantasyDraftUiApp').controller('ServicesCtrl',
 		});
 
 		$scope.postTeamSelection = function () {
-			$http.put('http://localhost:8080/fantasy-draft-api/fantasydraft/players/', $scope.teamGoalkeepers).success(function(data) {
+			$http.put('http://localhost:8080/fantasy-draft-api/fantasydraft/players/', $scope.fullTeam).success(function(data) {
 				$scope.teamSelectionStatus = "done";
 			});
 		}

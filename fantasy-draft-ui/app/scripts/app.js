@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('fantasyDraftUiApp', [
     'ngAnimate',
     'ngCookies',
@@ -16,20 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-	'ui.sortable',
-	'ui.bootstrap'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+	  'ui.sortable',
+	  'ui.bootstrap'
+  ]);

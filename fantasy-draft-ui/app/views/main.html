@@ -7,28 +7,28 @@
 			<accordion-group heading="Goalkeepers">
 				<div ui-sortable="sortablePoolGoalkeepers" id="poolGoalkeepers" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolGoalkeepers">
-					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+					<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 				</div>
 			</accordion-group>
 			
 			<accordion-group heading="Defenders">
 				<div ui-sortable="sortablePoolDefenders" id="poolDefenders" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolDefenders">
-					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+					<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 				</div>
 			</accordion-group>
 			
 			<accordion-group heading="Midfielders">
 				<div ui-sortable="sortablePoolMidfielders" id="poolMidfielders" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolMidfielders">
-					<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+					<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 				</div>
 			</accordion-group>
 			
 			<accordion-group heading="Strikers">
 				<div ui-sortable="sortablePoolStrikers" id="poolStrikers" class="apps-container screen" 
 				ng-model="screen" ng-repeat="screen in poolStrikers">
-					<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}} </div>
+					<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 				</div>
 			</accordion-group>
 
@@ -40,22 +40,22 @@
 	<div class="floatright">
 		<div ui-sortable="sortableSelectedGoalkeepers" id="selectedGoalkeepers" class="apps-container screen" 
 		ng-model="screen" ng-repeat="screen in teamGoalkeepers">
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+			<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 		</div>
 		
 		<div ui-sortable="sortableSelectedDefenders" id="selectedDefenders" class="apps-container screen" 
 		ng-model="screen" ng-repeat="screen in teamDefenders">
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+			<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 		</div>
 		
 		<div ui-sortable="sortableSelectedMidfielders" id="selectedMidfielders" class="apps-container screen" 
 		ng-model="screen" ng-repeat="screen in teamMidfielders">
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+			<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 		</div>
 		
 		<div ui-sortable="sortableSelectedStrikers" id="selectedStrikers" class="apps-container screen" 
 		ng-model="screen" ng-repeat="screen in teamStrikers">
-			<div class="app" ng-repeat="app in screen">{{app.title}}</div>
+			<div class="app" ng-repeat="app in screen">{{app.forename}} {{app.surname}}</div>
 		</div>
 		
 		<div style="clear: both;"></div>

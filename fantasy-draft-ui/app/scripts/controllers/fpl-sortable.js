@@ -16,11 +16,6 @@ angular.module('fantasyDraftUiApp').controller('FplSortableCtrl',
 
 			for (var i = 1; i <= limit; i++){
 			  tmpList.push({
-				//title: position + ' ' + i + ' to select ',
-				//position: position,
-				//squad: false,
-				//value: i
-
 				id: i,
 				forename: position + ' ' + i,
 				surname: ' to select',
@@ -36,10 +31,12 @@ angular.module('fantasyDraftUiApp').controller('FplSortableCtrl',
 
 			for (var i = 1; i <= limit; i++){
 			  tmpList.push({
-				title: position + ' ' + i,
+				id: i,
+				forename: 'Please',
+				surname: 'Select',
+				team: '',
 				position: position,
-				squad: true,
-				value: i
+				squad: true
 			  });
 			}
 			return tmpList;
@@ -110,6 +107,13 @@ angular.module('fantasyDraftUiApp').controller('FplSortableCtrl',
 		$scope.teamStrikers = [
 			$scope.list8
 		];
+
+		$scope.fullTeam = [
+			$scope.teamGoalkeepers,
+			$scope.teamDefenders,
+			$scope.teamMidfielders,
+			$scope.teamStrikers
+		]
 		
 		$scope.sortablePoolGoalkeepers = {
 			placeholder: "app",
