@@ -17,7 +17,7 @@ app.config([ '$routeProvider', '$httpProvider', function($routeProvider, $httpPr
 	    })
 	    .when('/login', {
 	        templateUrl: 'views/login.html',
-	        controller: 'AboutCtrl'
+	        controller: 'LoginCtrl'
 	    })
 	    .otherwise({
 	        redirectTo: '/'
