@@ -1,7 +1,7 @@
 app.run(function($rootScope, $http, $location, Base64Service) {
 
 	$rootScope.$on("$routeChangeStart", function() {
-        $http.get('user/authenticated/retrieve').success(function (data) {
+        $http.get('http://localhost:8080/fantasy-draft-api/fantasydraft/users/authenticated/retrieve/').success(function (data) {
             $rootScope.user = data;
         });
 	});
@@ -48,7 +48,7 @@ app.run(function($rootScope, $http, $location, Base64Service) {
     	// set the basic authentication header that will be parsed in the next request and used to authenticate
         httpHeaders.common['Authorization'] = 'Basic ' + Base64Service.encode(username + ':' + password);
         
-        $http.post('user/authenticate').success(function() {
+        $http.post('http://localhost:8080/fantasy-draft-api/fantasydraft/users/authenticate/').success(function() {
         	$rootScope.$broadcast('event:loginConfirmed');
         	
         	delete $rootScope.error;
