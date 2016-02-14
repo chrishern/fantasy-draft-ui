@@ -1,0 +1,65 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Fantasy Draft</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="user-scalable=yes">
+    
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-spinkit/build/angular-spinkit.min.css">
+    <link href="styles/custom.css" rel="stylesheet">
+    <link href="styles/jquery-ui.css" rel="stylesheet">
+
+    <!-- endbuild -->
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-spinkit/build/angular-spinkit.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/listener.js"></script>
+    <script src="scripts/service.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/submit-bids-modal.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/draft-results.js"></script>
+    <script src="scripts/controllers/transfer-window-ctrl.js"></script>
+    <script src="scripts/controllers/allSquads.js"></script>
+    <script src="scripts/controllers/leagueTable.js"></script>
+    <script src="scripts/controllers/transferWindow.js"></script>
+    <script src="scripts/controllers/transferWindowAuction.js"></script>
+    <script src="scripts/controllers/adminFunctions.js"></script>
+  </head>
+  <body ng-app="fantasyDraftUiApp">
+
+    <!-- Add your site or application content here -->
+    <div>
+
+      <div class="main-logo">
+        <img src="images/logo.png">
+      </div>
+
+      <div ng-view=""></div>
+
+      <div class="container footer">
+        <p><span class="glyphicon glyphicon-copyright-mark"></span> Black Cat Software 2014</p>
+      </div>
+    </div>  
+  </body>
+</html>

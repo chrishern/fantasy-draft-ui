@@ -1,0 +1,171 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
+    <ul class="nav nav-justified">
+        <li>
+            <a href="#/transferWindow" class="selectedNavItem">Transfer Window</a>
+        </li>
+        <li>
+            <a href="#/allSquads">Squads</a>
+        </li>
+        <li>
+            <a href="#/leagueTable">League Table</a>
+        </li>
+        <li>
+            <a href="#/auctionResults">Auction Results</a>
+        </li>
+    </ul>
+  </div>
+</nav><!-- /.navbar-->
+
+<div class="container firaText" style="background-color: #FFFFFF;" ng-controller="TransfersCtrl">
+  
+    <h3>{{team.teamName}}</h3>
+    <h4>Remaining Budget - £{{remainingBudget}}M</h4>
+
+    <table class="table table-bordered">
+      <tr style="background-color:#D9DBDB;">
+        <th>Player</th>
+        <th>Points</th>
+        <th>Cost</th>
+        <th>Sell to Pot Price</th>
+        <th>Sell to Pot</th>
+      </tr>
+
+      <tr repeat ng-repeat="player in team.currentPlayers" ng-class="getPlayerTableRoleStyle(player)">
+        <td>{{player.forename}} {{player.surname}}</td>
+        <td>{{player.pointsScored}}</td>
+        <td>£{{player.bigDecimal}}M</td>
+        <td><span ng-show="playerStillInSquad(player)">£{{player.sellToPotPrice}}M</span></td>
+        <td><span ng-show="playerStillInSquad(player)" ng-click="sellToPot(player)" class="pointer"><u>Sell</u></span></td>
+      </tr>
+  </table>
+
+  <h4>Outgoing Bids</h4>
+
+  <table class="table table-bordered">
+    <tr style="background-color:#D9DBDB;">
+      <th>Player</th>
+      <th>To Team</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+
+    <tr repeat ng-repeat="transfer in teamTransferDetail.myPendingBids" >
+      <th>{{transfer.forename}} {{transfer.surname}}</th>
+      <th>{{transfer.sellingTeam}}</th>
+      <th>£{{transfer.amount}}M</th>
+      <th>PENDING</th>
+    </tr>
+
+    <tr repeat ng-repeat="transfer in teamTransferDetail.myBoughtPlayers" >
+      <th>{{transfer.forename}} {{transfer.surname}}</th>
+      <th>{{transfer.sellingTeam}}</th>
+      <th>£{{transfer.amount}}M</th>
+      <th>ACCEPTED</th>
+    </tr>
+
+    <tr repeat ng-repeat="transfer in teamTransferDetail.myRejectedBids" >
+      <th>{{transfer.forename}} {{transfer.surname}}</th>
+      <th>{{transfer.sellingTeam}}</th>
+      <th>£{{transfer.amount}}M</th>
+      <th>REJECTED</th>
+    </tr>
+
+  </table>
+
+  <h4>Pending Incoming Bids</h4>
+
+  <table class="table table-bordered">
+    <tr style="background-color:#D9DBDB;">
+      <th>Player</th>
+      <th>To Team</th>
+      <th>Amount</th>
+      <th>Accept</th>
+      <th>Reject</th>
+    </tr>
+
+    <tr repeat ng-repeat="transfer in teamTransferDetail.incomingPendingBids" >
+      <th>{{transfer.forename}} {{transfer.surname}}</th>
+      <th>{{transfer.buyingTeam}}</th>
+      <th>£{{transfer.amount}}M</th>
+      <th><span class="glyphicon glyphicon-ok pointer" ng-click="acceptBid(transfer)" /></th>
+      <th><span class="glyphicon glyphicon-remove pointer" ng-click="rejectBid(transfer)" /></th>
+    </tr>
+
+  </table>
+
+  <h4>Confirmed Incoming Bids</h4>
+
+  <table class="table table-bordered">
+    <tr style="background-color:#D9DBDB;">
+      <th>Player</th>
+      <th>To Team</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+
+    <tr repeat ng-repeat="transfer in teamTransferDetail.mySoldPlayers" >
+      <th>{{transfer.forename}} {{transfer.surname}}</th>
+      <th>{{transfer.buyingTeam}}</th>
+      <th>£{{transfer.amount}}M</th>
+      <th>ACCEPTED</th>
+    </tr>
+
+    <tr repeat ng-repeat="transfer in teamTransferDetail.incomingRejectedBids" >
+      <th>{{transfer.forename}} {{transfer.surname}}</th>
+      <th>{{transfer.buyingTeam}}</th>
+      <th>£{{transfer.amount}}M</th>
+      <th>REJECTED</th>
+    </tr>
+
+  </table>
+
+  <h4>Make a Bid</h4>
+
+  <form class="form-horizontal" role="form">
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Team</label>
+
+      <div class="col-sm-4">
+        <select class="form-control" ng-model="teamBuyingFrom" ng-options="team.teamName for team in teamSummaries" ng-change="teamToBuyFromChanged()"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Player</label>
+      
+      <div class="col-sm-4">
+          <select class="form-control" ng-model="selectedPlayerToBuy" ng-options="getPlayerName(p) for p in playersToBuyOptions"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Amount</label>
+      
+      <div class="col-sm-4">
+          <input class="form-control" type="text" ng-model="bidAmount"></input>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-primary" ng-click="submitBid()" ng-show="allowedToSubmitBid()">Submit Bid</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

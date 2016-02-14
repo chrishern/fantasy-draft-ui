@@ -1,0 +1,352 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
+    <ul class="nav nav-justified">
+        <li>
+            <a href="#/">My Team</a>
+        </li>
+        <li>
+            <a href="#/" class="selectedNavItem">Transfer Centre</a>
+        </li>
+        <li>
+            <a href="#/auctionResults">Auction Results</a>
+        </li>
+    </ul>
+  </div>
+</nav><!-- /.navbar-->
+
+<div class="container firaText" style="background-color: #FFFFFF;" data-ng-show="!openDraftRound">
+  There are currently no open draft rounds for your team.  Check with your league administrator! 
+</div>
+
+<div class="container firaText" style="background-color: #FFFFFF;" data-ng-show="madeBidsInOpenDraftRound">
+  You have already made bids in the open auction window.  The window will close once all managers have submitted their bids.
+</div>
+
+<div class="container firaText" style="background-color: #FFFFFF;" ng-controller="TransferWindowCtrl">
+
+  <div class="row" data-ng-show="bidsSubmitted">
+    <div class="col-md-12">
+      Bids submitted!
+    </div> 
+  </div>
+
+  <!-- START: Filters and Remaining Budget -->
+  <div class="row" data-ng-show="canPickTeam()">
+    <div class="col-md-10">
+
+      <!-- START: Position Filters -->
+      <div class="row filterRow">
+        <form class = "form-inline filterForm">
+          <div class="col-md-1 filterHeader">
+            Filter
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="positionFilterRadios" id="goalkeeperFilter" ng-model="filterRadioValue" value="goalkeeperFilter" checked>
+            <label for="goalkeeperFilter">Goalkeepers</label>
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="positionFilterRadios" id="defenderFilter" ng-model="filterRadioValue" value="defenderFilter">
+            <label for="defenderFilter">Defenders</label>
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="positionFilterRadios" id="midfielderFilter" ng-model="filterRadioValue" value="midfielderFilter">
+            <label for="midfielderFilter">Midfielders</label>
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="positionFilterRadios" id="strikerFilter" ng-model="filterRadioValue" value="strikerFilter">
+            <label for="strikerFilter">Strikers</label>
+          </div>
+        </form>
+      </div>
+      <!-- END: Position Filters -->
+
+      <!-- START: Sorters -->
+      <form class = "form-inline filterForm">
+        <div class="row filterRow">
+        
+          <div class="col-md-1 filterHeader">
+            Sort
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="statsSortRadios" id="team" ng-model="sortRadioValue" value="team" checked />
+            <label for="team">Team</label>
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="statsSortRadios" id="totalPoints" ng-model="sortRadioValue" value="totalPoints"/>
+            <label for="totalPoints">Total Score</label>
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="statsSortRadios" id="goals" ng-model="sortRadioValue" value="goals" />
+            <label for="goals">Goals</label>
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="statsSortRadios" id="assists" ng-model="sortRadioValue" value="assists" />
+            <label for="assists">Assists</label>
+          </div>
+
+          <div class="col-md-3 form-group radio">
+            <input type="radio" class="pointer" name="statsSortRadios" id="cleanSheets" ng-model="sortRadioValue" value="cleanSheets" />
+            <label for="cleanSheets">Clean Sheets</label>
+          </div>          
+        
+        </div>
+        <div class="row filterRow">
+          <div class="col-md-1 filterHeader">
+            
+          </div>
+
+          <div class="col-md-2 form-group radio">
+            <input type="radio" class="pointer" name="statsSortRadios" id="pointsPerGame" ng-model="sortRadioValue" value="pointsPerGame" />
+            <label for="pointsPerGame">Points Per Game</label>
+          </div>
+        </div>
+      </form>
+      <!-- END: Position Filters -->
+
+    </div>
+
+    <div class="col-md-2">
+      <div class="row filterRow budget">
+        Remaining Budget £{{remainingBudget}}M
+      </div>
+    </div>
+
+  </div>
+  <!-- END: Filters and Remaining Budget -->
+
+  <!-- START: Draft Selections -->
+  <div class="row draftSelections" data-ng-show="canPickTeam()">
+
+    <!-- START: Available Players -->
+    <div class="col-md-8">
+
+      AVAILABLE PLAYER LIST
+
+      <div class="panel availablePlayerPanel">
+        <table class="table">
+          <tr>
+            <th>Player</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>C/S</th>
+            <th>Total Points</th>
+            <th>Points Per Game</th>
+          </tr>
+
+          <tr ng-repeat="goalkeeper in poolGoalkeepers | orderBy:sortRadioValue:isPlayersToSelectDescending()" data-ng-show="shouldShowSelectablePlayers('GK')">
+            <td class="pointer" ng-click="selectGoalkeeper(goalkeeper.forename, goalkeeper.surname)"><u>{{goalkeeper.forename}} {{goalkeeper.surname}}</u></td>
+            <td>{{goalkeeper.goals}}</td>
+            <td>{{goalkeeper.assists}}</td>
+            <td>{{goalkeeper.cleanSheets}}</td>
+            <td>{{goalkeeper.totalPoints}}</td>
+            <td>{{goalkeeper.pointsPerGame}}</td>
+            <td><span class="glyphicon glyphicon-ok pointer" ng-click="selectGoalkeeper(goalkeeper.forename, goalkeeper.surname)" /></td>
+          </tr>
+          <tr ng-repeat="defender in poolDefenders | orderBy:sortRadioValue:isPlayersToSelectDescending()" data-ng-show="shouldShowSelectablePlayers('DEF')">
+            <td class="pointer" ng-click="selectDefender(defender.forename, defender.surname)"><u>{{defender.forename}} {{defender.surname}}</u></td>
+            <td>{{defender.goals}}</td>
+            <td>{{defender.assists}}</td>
+            <td>{{defender.cleanSheets}}</td>
+            <td>{{defender.totalPoints}}</td>
+            <td>{{defender.pointsPerGame}}</td>
+            <td><span class="glyphicon glyphicon-ok pointer" ng-click="selectDefender(defender.forename, defender.surname)" /></td>
+          </tr>
+          <tr ng-repeat="midfielder in poolMidfielders | orderBy:sortRadioValue:isPlayersToSelectDescending()" data-ng-show="shouldShowSelectablePlayers('MID')">
+            <td class="pointer" ng-click="selectMidfielder(midfielder.forename, midfielder.surname)"><u>{{midfielder.forename}} {{midfielder.surname}}</u></td>
+            <td>{{midfielder.goals}}</td>
+            <td>{{midfielder.assists}}</td>
+            <td>{{midfielder.cleanSheets}}</td>
+            <td>{{midfielder.totalPoints}}</td>
+            <td>{{midfielder.pointsPerGame}}</td>
+            <td><span class="glyphicon glyphicon-ok pointer" ng-click="selectMidfielder(midfielder.forename, midfielder.surname)" /></td>
+          </tr>
+          <tr ng-repeat="striker in poolStrikers | orderBy:sortRadioValue:isPlayersToSelectDescending()" data-ng-show="shouldShowSelectablePlayers('ATK')">
+            <td class="pointer" ng-click="selectStriker(striker.forename, striker.surname)"><u>{{striker.forename}} {{striker.surname}}</u></td>
+            <td>{{striker.goals}}</td>
+            <td>{{striker.assists}}</td>
+            <td>{{striker.cleanSheets}}</td>
+            <td>{{striker.totalPoints}}</td>
+            <td>{{striker.pointsPerGame}}</td>
+            <td><span class="glyphicon glyphicon-ok pointer" ng-click="selectStriker(striker.forename, striker.surname)"/></td>
+          </tr>
+
+
+        </table>
+      </div>
+
+    </div>
+    <!-- END: Available Players -->
+
+    <!-- START: Selections -->
+    <div class="col-md-4">
+
+      <!-- START: Headers -->
+      <div class="row">
+        <div class="col-md-9">
+          MY SQUAD
+        </div>
+
+        <div class="col-md-3">
+          BID
+        </div>
+      </div>
+      <!-- END: Headers -->
+
+      <!-- START: Goalkeepers -->
+      <div class="row pickedPlayers">
+
+        <div class="row playerRow" ng-repeat="goalkeeper in confirmedGoalkeepers">
+          <div class="col-md-9">
+            {{goalkeeper.forename}} {{goalkeeper.surname}}
+          </div>
+
+          <div class="col-md-3">
+            £{{goalkeeper.bigDecimal}}M
+          </div>
+        </div>        
+
+        <div class="row playerRow" ng-repeat="goalkeeper in teamGoalkeepers">
+          <div class="col-md-9">
+            {{goalkeeper.forename}} {{goalkeeper.surname}}
+          </div>
+
+          <div class="col-md-3">
+            <input type="text" id="bidAmount" class="bidAmountEntry" placeholder="£" ng-keyup="calculateRemainingBudget()" data-ng-model="goalkeeper.bidAmount" />
+            <span class="glyphicon glyphicon-remove pointer" ng-click="unselectGoalkeeper($index)"/>
+          </div>
+        </div>
+
+      </div>
+      <!-- END: Goalkeepers -->
+
+      <!-- START: Defenders -->
+      <div class="row pickedPlayers">
+        
+        <div class="row playerRow" ng-repeat="defender in confirmedDefenders">
+          <div class="col-md-9">
+            {{defender.forename}} {{defender.surname}}
+          </div>
+
+          <div class="col-md-3">
+            £{{defender.bigDecimal}}M
+          </div>
+        </div>        
+
+        <div class="row playerRow" ng-repeat="defender in teamDefenders">
+          <div class="col-md-9">
+            {{defender.forename}} {{defender.surname}}
+          </div>
+
+          <div class="col-md-3">
+            <input type="text" id="bidAmount" class="bidAmountEntry" placeholder="£" ng-keyup="calculateRemainingBudget()" data-ng-model="defender.bidAmount" />
+            <span class="glyphicon glyphicon-remove pointer" ng-click="unselectDefender($index)"/>
+          </div>
+        </div>
+
+      </div>
+      <!-- END: Defenders -->
+
+      <!-- START: Midfielders -->
+      <div class="row pickedPlayers">
+        
+        <div class="row playerRow" ng-repeat="midfielder in confirmedMidfielders">
+          <div class="col-md-9">
+            {{midfielder.forename}} {{midfielder.surname}}
+          </div>
+
+          <div class="col-md-3">
+            £{{midfielder.bigDecimal}}M
+          </div>
+        </div>        
+
+        <div class="row playerRow" ng-repeat="midfielder in teamMidfielders">
+          <div class="col-md-9">
+            {{midfielder.forename}} {{midfielder.surname}}
+          </div>
+
+          <div class="col-md-3">
+            <input type="text" id="bidAmount" class="bidAmountEntry" placeholder="£" ng-keyup="calculateRemainingBudget()" data-ng-model="midfielder.bidAmount" />
+            <span class="glyphicon glyphicon-remove pointer" ng-click="unselectMidfielder($index)"/>
+          </div>
+        </div>
+
+      </div>
+      <!-- END: Midfielders -->
+
+      <!-- START: Strikers -->
+      <div class="row pickedPlayers">
+        
+        <div class="row playerRow" ng-repeat="striker in confirmedStrikers">
+          <div class="col-md-9">
+            {{striker.forename}} {{striker.surname}}
+          </div>
+
+          <div class="col-md-3">
+            £{{striker.bigDecimal}}M
+          </div>
+        </div>        
+
+        <div class="row playerRow" ng-repeat="striker in teamStrikers">
+          <div class="col-md-9">
+            {{striker.forename}} {{striker.surname}}
+          </div>
+
+          <div class="col-md-3">
+            <input type="text" id="bidAmount" class="bidAmountEntry" placeholder="£" ng-keyup="calculateRemainingBudget()" data-ng-model="striker.bidAmount" />
+            <span class="glyphicon glyphicon-remove pointer" ng-click="unselectStriker($index)"/>
+          </div>
+        </div>
+
+      </div>
+      <!-- END: Strikers -->
+
+      <!-- START: Team Submission -->
+      <div class="teamSubmission">
+        <button class="btn btn-primary"  id="saveTeamButton" ng-click="openSubmitBidsModal()" data-ng-show="isTeamSelectionComplete()">Submit Bids</button>
+      </div>
+      <!-- END: Team Submission -->
+
+    </div>
+    <!-- END: Selections -->
+
+  </div>
+  <!-- END: Draft Selections -->  
+
+  <script type="text/ng-template" id="submitBidsModal.html">
+    <div class="modal-header firaText">
+        <h3 class="modal-title">Confirm Bids Submission</h3>
+    </div>
+    <div class="modal-body firaText">
+        Are you sure you want to submit your bids?
+    </div>
+    <div class="modal-footer firaText">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+</div>
+    
+    
+    
+    
+    

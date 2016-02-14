@@ -1,0 +1,265 @@
+@font-face {
+  font-family: impact;
+  src: url(../fonts/impact.ttf);
+}
+
+@font-face {
+  font-family: fira;
+  src: url(../fonts/firasans-bold.otf);
+}
+
+body {
+  background-image: url(../images/grassEffectTramline.png);
+  font-size: 14px;
+  background-position: left top;
+  background-repeat: repeat;
+  font-family: impact;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  /*font-family: helvetica, arial, sans-serif;*/
+}
+
+.navbar-default .nav-justified>li>a {
+  color: #FFFFFF;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+.selectedNavItem {
+  color: #37B34A !important;
+}
+
+.navbar {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #000000;
+  font-size: 24px;
+  border-radius: 0px;
+}
+
+.nav > li > a {
+  border-left-color: #FFFFFF;
+  border-left-width: 2px;
+  border-left-style:  solid;
+  border-right-color: #FFFFFF;
+  border-right-width: 2px;
+  border-right-style:  solid;
+}
+
+.nav > li:first-child > a {
+  border-left-color: #000000;
+}
+
+.nav > li:last-child > a {
+  border-right-color: #000000;
+}
+
+.navbar-default {
+  border-color: #FFFFFF;
+  border-bottom-width: 4px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
+.navbar-collapse {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.main-logo {
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  height:115px;
+  width: 1000px;
+}
+
+label {
+  font-weight: normal;
+}
+
+.feature-photo {
+  width: 100%;
+}
+
+#header { 
+  max-width: 1000px;
+  background-color: #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.strapline {
+  font-size: 42px;
+  margin-bottom: 90px;
+}
+
+.form-group {
+  font-size: 20px;
+}
+
+.infoBoxesParent {  
+  background-image: url(../img/grassEffectTramline.png);
+  background-position: left top;
+  background-repeat: repeat;
+}
+
+.infoBoxes {
+  padding-top: 2em;
+  background-color: #000000;
+  border-top: thick solid #37B34A;
+}
+
+.loginForm {
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+.form-input-item {
+  font-family: helvetica, arial, sans-serif;
+  color: #000000;
+}
+
+.firaText {
+  font-family: fira;  
+}
+
+/* START: Auction styles; */
+
+.filterRow {
+  margin-top: 10px;
+}
+
+.filterForm {
+  font-size: 12px;
+}
+
+.filterHeader {
+  margin-top: 4px;
+}
+
+.form-group {
+  font-size: 12px;
+}
+
+.budget {
+  font-size: 18px;
+}
+
+.draftSelections {
+  margin-top: 40px;
+}
+
+.pickedPlayers {
+  margin-top: 30px;
+}
+
+.playerRow {
+  margin-bottom: 10px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.bidAmountEntry {
+  width: 50%;
+}
+
+.availablePlayerPanel {
+  overflow-y: scroll;
+  max-height: 300px;
+  border-color: #000000;
+}
+
+.teamSubmission {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* END: Auction styles; */
+
+footer {
+  background: #000000;
+  color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.2em 0 0.6em;
+  max-width: 1000px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+.clearing {
+  clear: both;
+}
+
+@media screen and (max-width: 1200px) {
+  
+}
+
+/**
+* iPad
+*/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .col-lg-8 {
+    width: 66.6667%;
+    float: left;
+  }
+
+  .col-lg-4 {
+    width: 33.3333%;
+    float: left;
+  }
+
+  .main-logo {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .feature-photo {
+    margin: 0.1em 0;
+  }
+  
+  .strapline {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }  
+  
+  .main-logo {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  
+  footer .pull-right {
+    display: none;
+  }
+
+  .strapline {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .main-logo {
+    width: 100%;
+  }
+}
